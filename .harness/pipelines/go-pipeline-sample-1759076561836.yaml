@@ -63,6 +63,7 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
+        description: ""
     - stage:
         name: deploy
         identifier: deploy
@@ -71,7 +72,7 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: harnessguestbook
+            serviceRef: goapp
           environment:
             environmentRef: harnessdevenv
             deployToAll: false
