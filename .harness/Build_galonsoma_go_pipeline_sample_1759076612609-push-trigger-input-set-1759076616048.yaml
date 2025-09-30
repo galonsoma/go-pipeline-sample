@@ -1,5 +1,6 @@
 inputSet:
   name: Build_galonsoma_go_pipeline_sample_1759076612609-push-trigger-input-set
+  tags: {}
   identifier: Build_galonsoma_go_pipeline_sample_1759076612609pushtriggerinputset
   orgIdentifier: default
   projectIdentifier: default_project
@@ -12,3 +13,16 @@ inputSet:
             type: branch
             spec:
               branch: <+trigger.branch>
+    stages:
+      - stage:
+          identifier: build
+          type: CI
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: dockerbuild
+                    type: BuildAndPushDockerRegistry
+                    spec:
+                      connectorRef: dockerconnector
+                      repo: alonsoma/test-go
