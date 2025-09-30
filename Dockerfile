@@ -1,12 +1,11 @@
+# Stage 1: Build the Go binary
+FROM golang:1.21 AS builder
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o go-sample-app
+
+# Stage 2: Minimal final image
 FROM alpine:3.12
-# Add Maintainer Info
 LABEL maintainer="Community Engineering Team <community-engg@harness.io.>"
-# Copy the Go binary into the image. The Go binary must be
-# statically compiled with CGO disabled. Use the following
-# build command:
-#
-#   CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
-#
-ADD go-sample-app /bin/
-# Command to run the executable
+COPY --from=builder /app/go-sample-app /bin/go-sample-app
 ENTRYPOINT ["/bin/go-sample-app"]
