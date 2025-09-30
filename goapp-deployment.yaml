@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go_app
+  name: go-app
 spec:
   replicas: 3
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: go_app
+      app: go-app
   template:
     metadata:
       labels:
-        app: go_app
+        app: go-app
     spec:
       containers:
       - image: hub.docker.com/repository/docker/alonsoma/
