@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go_app
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: go_app
+  template:
+    metadata:
+      labels:
+        app: go_app
+    spec:
+      containers:
+      - image: hub.docker.com/repository/docker/alonsoma/
+        name: test-go
+        ports:
+        - containerPort: 80
